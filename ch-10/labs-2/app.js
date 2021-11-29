@@ -2,6 +2,7 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
+const { Http2ServerRequest } = require('http2')
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
@@ -21,5 +22,16 @@ module.exports = async function (fastify, opts) {
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
     options: Object.assign({}, opts)
+  })
+
+
+  fastify.addHook('onRequest',async function (request){
+
+   if(request.ip === '211.133.33.113'){
+    
+   throw fastify.httpErrors.forbidden()
+
+   }
+
   })
 }

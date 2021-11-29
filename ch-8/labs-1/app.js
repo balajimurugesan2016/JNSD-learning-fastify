@@ -40,7 +40,7 @@ module.exports = async function (fastify, opts) {
       // Default not found handler with preValidation and preHandler hooks
       if(request.routePath  !== '/' )
       {
-        reply.notFound();
+        return reply.notFound();
       }
 
       if(request.method !== 'GET'){

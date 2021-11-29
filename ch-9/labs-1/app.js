@@ -5,9 +5,29 @@ const router = express.Router()
 const { PORT = 3000 } = process.env
 
 router.get('/', (req, res) => {
-  setTimeout(() => {
-    res.send((req.query.un || '').toUpperCase())
-  }, 1000)
+  const {un} = req.query;
+
+  if(Array.isArray(un)){
+setTimeout(() => {
+
+ un.forEach((data,index) => {
+    
+    un[index].toUpperCase()
+
+  })
+
+  res.send(un)
+  
+}, 1000);
+  
+
+  }
+  else{
+    setTimeout(() => {
+      res.send((un || '').toUpperCase())
+    }, 1000)
+  }
+ 
 })
 
 app.use(router)
